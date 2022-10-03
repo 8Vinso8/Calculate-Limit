@@ -10,7 +10,7 @@ using namespace std;
 int main(){
   long double e = 0.0000001;
   long double b = 0.0;
-  double iter = e;
+  long double iter = e;
   long long int n = 1;
   long double Sn = 0;
   long long int count = 0;
