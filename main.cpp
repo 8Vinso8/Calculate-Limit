@@ -40,7 +40,7 @@ int main()
     return 0;
   }
   int precision = CalculatePrecision(e_str);
-  int n = 1;
+  long long int n = 1;
   long double sum = 0;
   long double current, previous;
   current = Formula(n);
