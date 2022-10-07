@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
 #include <math.h>
-#include <string>
 
 using namespace std;
 
@@ -24,6 +23,25 @@ int CalculatePrecision(const string &e_str)
   return precision;
 }
 
+long double CalculateSum(long double e, long long int n)
+{
+  long double sum = 0;
+  long double current, previous;
+  current = Formula(n);
+  sum += current;
+  n++;
+  while (true)
+  {
+    previous = current;
+    current = Formula(n);
+    sum += current;
+    n++;
+    if (abs(current - previous) < e)
+      break;
+  }
+  return sum;
+}
+
 int main()
 {
   string e_str;
@@ -34,30 +52,14 @@ int main()
   {
     e = stod(e_str);
   }
-  catch (const std::exception &except)
+  catch (const exception &except)
   {
-    std::cerr << except.what() << '\n';
+    cerr << except.what() << '\n';
     return 0;
   }
-  int precision = CalculatePrecision(e_str);
   long long int n = 1;
-  long double sum = 0;
-  long double current, previous;
-  current = Formula(n);
-  sum += current;
-  n++;
-  bool calculating = true;
-  while (calculating)
-  {
-    previous = current;
-    current = Formula(n);
-    sum += current;
-    if (abs(current - previous) < e)
-      calculating = false;
-    n++;
-  }
   cout << fixed;
-  cout << setprecision(precision);
-  cout << "sum = " << sum << endl;
+  cout << setprecision(CalculatePrecision(e_str));
+  cout << "sum = " << CalculateSum(e, n) << endl;
   return 0;
 }
